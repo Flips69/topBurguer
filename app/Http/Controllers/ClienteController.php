@@ -14,6 +14,7 @@ class ClienteController extends Controller
             'telefone' => $request->telefone,
             'endereco' => $request->endereco,
             'email' => $request->email,
+            'cpf' => $request->cpf,
             'password' => Hash::make($request->password),
         ]);
 
