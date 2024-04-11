@@ -24,4 +24,18 @@ class ClienteController extends Controller
             "data" => $clientes
         ], 200);
     }
+
+    public function clienteStore(Request $request){
+
+        $clienteData = $request->all();
+
+        if($request->hasFile('imagem')){
+            $imagem = $request->file('imagem');
+            $nomeImagem = time().'.'.$imagem->getClientOriginalExtension();
+            $caminhoImagem = $imagem->storeAs('imagens/clientes', $nomeImagem, 'public');
+            $produtoData['imagem'] = $caminhoImagem;
+        }
+        $clientes = Cliente::create($clienteData);
+        return response()->json(['cliente'=>$clientes], 201);
+    }
 }
